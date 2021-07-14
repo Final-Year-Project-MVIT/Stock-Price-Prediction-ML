@@ -7,8 +7,6 @@ import pandas as pd
 import numpy as np
 from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error
-from sklearn.metrics import mean_absolute_percentage_error
-
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')  #provides interface to create complex plots with general visual properties
 import math, random    
@@ -134,9 +132,7 @@ def displayresult():
             # print("ARIMA Accuracy:",acc)
             # print("##############################################################################")
 
-            # ARIMA_MAPE = np.mean(np.abs((test - predictions)/test))*100
-            ARIMA_MAPE = mean_absolute_percentage_error(test,predictions)*100
-
+            ARIMA_MAPE = np.mean(np.abs((test - predictions)/test))*100
             print("ARIMA MAPE: ",ARIMA_MAPE)
             print("##############################################################################")
 
@@ -184,10 +180,11 @@ def displayresult():
         #For X_train=np.reshape(no. of rows/samples, timesteps, no. of cols/features)
         
         #Building RNN
-        from keras.models import Sequential
-        from keras.layers import Dense
-        from keras.layers import Dropout
-        from keras.layers import LSTM
+        from tensorflow.keras.models import Sequential
+        from tensorflow.keras.layers import Dense
+        from tensorflow.keras.layers import Dropout
+        from tensorflow.keras.layers import LSTM
+        
         
         #Initialise RNN
         regressor=Sequential()
@@ -264,9 +261,7 @@ def displayresult():
         # acc=accuracy_score(real_stock_price, predicted_stock_price)
         # print("ARIMA Accuracy:",acc)
         # print("##############################################################################")
-        # LSTM_MAPE= np.mean(np.abs((real_stock_price - predicted_stock_price)/real_stock_price))*100
-        LSTM_MAPE= mean_absolute_percentage_error(real_stock_price,predicted_stock_price)*100
-
+        LSTM_MAPE= np.mean(np.abs((real_stock_price - predicted_stock_price)/real_stock_price))*100
         print("LSTM MAPE: ",LSTM_MAPE)
         print("##############################################################################")
         #Forecasting Prediction
@@ -342,9 +337,7 @@ def displayresult():
         print("##############################################################################")
         print("Tomorrow's ",quote," Closing Price Prediction by Linear Regression: ",lr_pred)
         print("##############################################################################")
-        # LR_MAPE= np.mean(np.abs((y_test - y_test_pred)/y_test))*100
-        LR_MAPE= mean_absolute_percentage_error(y_test,y_test_pred)*100
-
+        LR_MAPE= np.mean(np.abs((y_test - y_test_pred)/y_test))*100
         print("LR MAPE: ",LR_MAPE)
         print("##############################################################################")
         print("Linear Regression RMSE:",error_lr)
@@ -512,21 +505,3 @@ def displayresult():
                                forecast_set=forecast_set,error_lr=round(error_lr,2),error_lstm=round(error_lstm,2),error_arima=round(error_arima,2))
 if __name__ == '__main__':
    app.run()
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
